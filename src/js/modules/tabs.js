@@ -3,6 +3,7 @@ const tabs = (
   tabsSelector,
   contentTabSelector,
   activeClassTab,
+  display = "block",
 ) => {
   const headerTabs = document.querySelector(headerTabsSelector),
     tabs = document.querySelectorAll(tabsSelector),
@@ -17,7 +18,7 @@ const tabs = (
   }
 
   function showTabContent(i = 0) {
-    content[i].style.display = "block";
+    content[i].style.display = display;
     tabs[i].classList.add(activeClassTab);
   }
 
