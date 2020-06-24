@@ -8,7 +8,21 @@ const modal = () => {
     const triger = document.querySelectorAll(trigerSelecter),
       popup = document.querySelector(popupSelector),
       close = document.querySelector(closeSelector),
-      windows = document.querySelectorAll("[data-modal]");
+      windows = document.querySelectorAll("[data-modal]"),
+      widthScroll = calcScroll();
+
+    function calcScroll() {
+      const tempDiv = document.createElement("div");
+      tempDiv.style.width = "50px";
+      tempDiv.style.height = "50px";
+      tempDiv.style.visibility = "hidden";
+      tempDiv.style.overflowY = "scroll";
+
+      document.body.append(tempDiv);
+      const scroll = tempDiv.offsetWidth - tempDiv.clientWidth;
+      tempDiv.remove();
+      return scroll;
+    }
 
     triger.forEach((item) => {
       item.addEventListener("click", (e) => {
@@ -23,6 +37,7 @@ const modal = () => {
         popup.style.display = "block";
         /* document.body.style.overflow = "hiden"; */
         //bootstrap
+        document.body.style.marginRight = `${widthScroll}px`;
         document.body.classList.add("modal-open");
       });
     });
@@ -32,6 +47,7 @@ const modal = () => {
         item.style.display = "none";
       });
       popup.style.display = "none";
+      document.body.style.marginRight = `0px`;
       /*   document.body.style.overflow = ""; */
       document.body.classList.remove("modal-open");
     });
@@ -43,6 +59,7 @@ const modal = () => {
         });
         popup.style.display = "none";
         /*  document.body.style.overflow = ""; */
+        document.body.style.marginRight = `0px`;
         document.body.classList.remove("modal-open");
       }
     });
